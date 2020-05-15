@@ -80,14 +80,7 @@ namespace tp2skunkapi.DataAccess
         {
             Game currentGame = (Game)_cache.Get("currentGame");
             currentGame.checkForVictory();
-            if (currentGame.turnSeriesTracker == (currentGame.players.Count - 1))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return currentGame.isVictory();
         }
 
     }
