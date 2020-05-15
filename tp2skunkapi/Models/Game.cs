@@ -33,6 +33,14 @@ namespace tp2skunkapi.Models
 			players = playerInitialized;
 		}
 
+		public Game(List<Player> playerInitialized)
+		{
+			gameSeries = new List<Turn>();
+			gameDice = new Dice();
+			players = new List<Player>();
+			players = playerInitialized;
+		}
+
 		public void addTurnToSeries(Turn turn)
 		{
 			gameSeries.Add(turn);
@@ -102,6 +110,11 @@ namespace tp2skunkapi.Models
 		public bool isVictory()
 		{
 			return victory;
+		}
+
+		public List<Player> getAllPlayers()
+		{
+			return players;
 		}
 
 	}
