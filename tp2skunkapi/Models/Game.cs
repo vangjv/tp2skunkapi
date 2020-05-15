@@ -13,6 +13,7 @@ namespace tp2skunkapi.Models
 		public int kittyCount { get; set; }
 		public Dice gameDice { get; set; }
 		public bool victory { get; set; }
+		public int turnSeriesTracker { get; set; }
 
 		public Game(List<string> playerNames, Dice diceUsed)
 		{
@@ -26,6 +27,7 @@ namespace tp2skunkapi.Models
 			playersWithScoreOver100 = new List<Player>();
 			victory = false;
 			kittyCount = 0;
+			turnSeriesTracker = 0;
 		}
 
 		public Game(List<Player> playerInitialized, Dice diceUsed)
@@ -37,6 +39,7 @@ namespace tp2skunkapi.Models
 			playersWithScoreOver100 = new List<Player>();
 			victory = false;
 			kittyCount = 0;
+			turnSeriesTracker = 0;
 		}
 
 		public Game(List<Player> playerInitialized)
@@ -46,6 +49,7 @@ namespace tp2skunkapi.Models
 			players = new List<Player>();
 			players = playerInitialized;
 			playersWithScoreOver100 = new List<Player>();
+			turnSeriesTracker = 0;
 		}
 
 		public void addTurnToSeries(Turn turn)
@@ -122,6 +126,15 @@ namespace tp2skunkapi.Models
 		public List<Player> getAllPlayers()
 		{
 			return players;
+		}
+
+		public void incrementTurnSeriesTracker()
+		{
+			turnSeriesTracker = turnSeriesTracker + 1;
+			if (turnSeriesTracker == players.Count())
+			{
+				turnSeriesTracker = 0;
+			}
 		}
 
 	}

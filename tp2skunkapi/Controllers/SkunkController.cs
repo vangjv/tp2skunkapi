@@ -30,13 +30,13 @@ namespace tp2skunkapi.Controllers
 
         [HttpGet]
         [Route("rules")]
-        public string Get()
+        public ActionResult Get()
         {
-            return rulesAccess.getRules();
+            return Ok(rulesAccess.getRules());
         }
 
         [HttpPost("initialize")]
-        public InitializeRequest Initialize([FromBody]InitializeRequest initializeRequest)
+        public ActionResult Initialize([FromBody]InitializeRequest initializeRequest)
         {
             //set gamemode
             skunkOptions.setGameMode(initializeRequest.GameMode);
@@ -45,13 +45,33 @@ namespace tp2skunkapi.Controllers
                 //initialize tournament
                 tournamentObject.createNewTournament();
                 gameObject.createNewGame(initializeRequest);
-
             } else
             {
                 //initialize single game
                 gameObject.createNewGame(initializeRequest);                
             }
-            return initializeRequest;
+            SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(),gameObject.getPlayers());
+            return Ok(skunkStatus);
+        }
+
+        [HttpGet]
+        [Route("roll")]
+        public ActionResult Roll()
+        {
+            turnObject.processTurnRoll();
+            //check if player has another turn
+            if (turnObject.hasAnotherRoll())
+            {
+                SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers());
+                return Ok(skunkStatus);
+            } else
+            {
+                //if end of turn series, check for victory
+                if (gameObject.endOfTurnSeries())
+                {
+                    gameObject.checkForVictory();
+                }
+            }
         }
     }
 }
