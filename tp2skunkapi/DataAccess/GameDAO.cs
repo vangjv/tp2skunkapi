@@ -32,6 +32,7 @@ namespace tp2skunkapi.DataAccess
         public void processNewTurn()
         {
             Game currentGame = (Game)_cache.Get("currentGame");
+            turnObject.createNewTurn(currentGame.getAllPlayers()[currentGame.turnSeriesTracker]);
         }
 
         public List<Player> getPlayers()
@@ -61,6 +62,18 @@ namespace tp2skunkapi.DataAccess
         {
             Game currentGame = (Game)_cache.Get("currentGame");
             currentGame.checkForVictory();
+        }
+
+        public void addTurnToSeries(Turn lastTurn)
+        {
+            Game currentGame = (Game)_cache.Get("currentGame");
+            currentGame.addTurnToSeries(lastTurn);
+        }
+
+        public void setScoreFromTurn(Turn turn)
+        {
+            Game currentGame = (Game)_cache.Get("currentGame");
+            currentGame.setScoreFromTurn(turn);
         }
 
         public bool isVictory()

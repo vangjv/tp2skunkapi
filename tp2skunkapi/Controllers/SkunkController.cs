@@ -62,15 +62,72 @@ namespace tp2skunkapi.Controllers
             //check if player has another turn
             if (turnObject.hasAnotherRoll())
             {
-                SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers());
+                SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), false, false, turnObject.getCurrentTurn());
                 return Ok(skunkStatus);
             } else
             {
+                //end of turn add turn sequence to game
+                Turn lastTurn = turnObject.getCurrentTurn();
+                gameObject.addTurnToSeries(lastTurn);
+                //move to next player
                 //if end of turn series, check for victory
                 if (gameObject.endOfTurnSeries())
                 {
-                    gameObject.checkForVictory();
+                    if (gameObject.isVictory()) {                        
+                        gameObject.incrementPlayerTracker();
+                        gameObject.processNewTurn();
+                        SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(),true,false, lastTurn);
+                        return Ok(skunkStatus);
+                    } else
+                    {
+                        gameObject.incrementPlayerTracker();
+                        gameObject.processNewTurn();
+                        SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), false, false, lastTurn);
+                        return Ok(skunkStatus);
+                    }
+                } else
+                {
+                    gameObject.incrementPlayerTracker();
+                    gameObject.processNewTurn();
+                    SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), false, false, lastTurn);
+                    return Ok(skunkStatus);
                 }
+            }
+        }
+
+        [HttpGet]
+        [Route("pass")]
+        public ActionResult Pass()
+        {
+            Turn lastTurn = turnObject.getCurrentTurn();
+            lastTurn.passTurn();
+            //transfer player score from turn to game
+            gameObject.setScoreFromTurn(lastTurn);
+            //move to next player
+            //if end of turn series, check for victory
+            if (gameObject.endOfTurnSeries())
+            {                
+                if (gameObject.isVictory())
+                {
+                    gameObject.incrementPlayerTracker();
+                    gameObject.processNewTurn();
+                    SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), true, false, lastTurn);
+                    return Ok(skunkStatus);
+                }
+                else
+                {
+                    gameObject.incrementPlayerTracker();
+                    gameObject.processNewTurn();
+                    SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), false, false, lastTurn);
+                    return Ok(skunkStatus);
+                }
+            }
+            else
+            {
+                gameObject.incrementPlayerTracker();
+                gameObject.processNewTurn();
+                SkunkStatus skunkStatus = new SkunkStatus(turnObject.getCurrentTurn(), gameObject.getPlayers(), false, false, lastTurn);
+                return Ok(skunkStatus);
             }
         }
     }

@@ -88,6 +88,7 @@ namespace tp2skunkapi.Models
 		public void summarizeTurn()
 		{
 			player.addScore(turnScore);
+			hasAnotherRoll = false;
 		}
 
 		public int getChipsToKitty()

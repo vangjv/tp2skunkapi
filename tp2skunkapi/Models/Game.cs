@@ -137,5 +137,10 @@ namespace tp2skunkapi.Models
 			}
 		}
 
+		public void setScoreFromTurn(Turn turn)
+		{
+			players[turnSeriesTracker].setScore(turn.player.getScore());
+		}
+
 	}
 }
