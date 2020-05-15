@@ -7,7 +7,7 @@ namespace tp2skunkapi.Models
 {
     public class Die : IDie
     {
-		public int lastRoll;
+		public int lastRoll { get; set; }
 		public Die()
 		{
 			this.roll();

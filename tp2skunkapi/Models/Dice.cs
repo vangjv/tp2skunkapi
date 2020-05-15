@@ -7,11 +7,11 @@ namespace tp2skunkapi.Models
 {
     public class Dice
     {
-        private int lastRoll;
-        private Die die1;
-        private Die die2;
-        private SkunkType skunkType;
-        public Dice()
+        public int lastRoll { get; set; }
+		public Die die1 { get; set; }
+		public Die die2 { get; set; }
+		public SkunkType skunkType { get; set; }
+		public Dice()
         {
             this.die1 = new Die();
             this.die2 = new Die();
