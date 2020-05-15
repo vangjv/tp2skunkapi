@@ -7,13 +7,11 @@ using tp2skunkapi.Models;
 namespace tp2skunkapitest
 {
     [TestClass]
-    public class TournamentUnitTest
+    public class GameUnitTest
     {
         [TestMethod]
-        public void TestTournament()
+        public void TestGame()
         {
-            Dice testDice = new Dice();
-
             Assert.Fail();
         }
 

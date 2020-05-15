@@ -17,7 +17,7 @@ namespace tp2skunkapi.DataAccess
 
         public void createNewTournament(InitializeRequest initializeRequest)
         {
-            cache.Set("rules", Initializer.getRules());
+            _cache.Set("rules", "");
         }
     }
 }
