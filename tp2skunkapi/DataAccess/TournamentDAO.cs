@@ -3,22 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using tp2skunkapi.Models;
 
 namespace tp2skunkapi.DataAccess
 {
-    public class RulesAccess
+    public class TournamentDAO
     {
         private readonly IMemoryCache _cache;
-        public RulesAccess(IMemoryCache memoryCache)
+        public TournamentDAO(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
         }
-        
-        public string getRules()
+
+        public void createNewTournament(InitializeRequest initializeRequest)
         {
-            return _cache.Get("rules").ToString();
+            cache.Set("rules", Initializer.getRules());
         }
-
-
     }
 }

@@ -29,11 +29,14 @@ Any number can play. [Assume at least two players!] The suggested number of chip
 to start is 50.
 
 The first player to accumulate a total of 100 or more points can continue to score as many
-points over 100 as he believes is needed to win.When he decides to stop, his total score
+points over 100 as he/she believes is needed to win. When he/she decides to stop, his/her total score
 is the goal. Each succeeding player receives one more chance to better the goal and end the game.
 
 The winner of each game collects all chips in kitty and in addition, five chips
-from each losing player or 10 chips from any player without a score.";
+from each losing player or 10 chips from any player without a score.
+
+For tournament play, a game ends when any player has 0 chips.  A new game will begin.  When a player 
+accumuates 150 chips, they win the tournament.";
 
         public static string getRules()
         {
