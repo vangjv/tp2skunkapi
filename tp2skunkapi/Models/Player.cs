@@ -10,12 +10,12 @@ namespace tp2skunkapi.Models
         private int score;
         private int chipCount;
         private String playerName;
-        Player()
+        public Player()
         {
             score = 0;
             chipCount = 100;
         }
-        Player(String playerName, int score, int chipCount)
+        public Player(String playerName, int score, int chipCount)
         {
             this.playerName = playerName;
             this.score = score;
