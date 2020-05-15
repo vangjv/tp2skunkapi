@@ -38,6 +38,12 @@ namespace tp2skunkapi.Models
 			return currentPlayerStatus[getChipLeaderIndex()];
 		}
 
+		public void addGameToSeries(Game game)
+		{
+			gameSeries.Add(game);
+			currentPlayerStatus = game.getAllPlayers();
+		}
+
 		public bool checkForTournamentEnd()
 		{
 			return false;
