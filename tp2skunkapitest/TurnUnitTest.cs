@@ -11,7 +11,7 @@ namespace tp2skunkapitest
     {
 
 		[TestMethod]
-		public void test_getTurnScore()
+		public void TestGetTurnScore()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -23,7 +23,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_processRoll()
+		public void TestProcessRoll()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -38,7 +38,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-	public void test_turnScore()
+		public void TestTurnScore()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -51,7 +51,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_SummarizeTurn()
+		public void TestSummarizeTurn()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -65,7 +65,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_double_skunk()
+		public void TestDoubleSkunk()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -82,7 +82,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_skunk_duece()
+		public void TestSkunkDuece()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -100,7 +100,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_single_skunk()
+		public void TestSingleSkunk()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
@@ -118,7 +118,7 @@ namespace tp2skunkapitest
 		}
 
 		[TestMethod]
-		public void test_no_penalty()
+		public void TestNoPenalty()
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
