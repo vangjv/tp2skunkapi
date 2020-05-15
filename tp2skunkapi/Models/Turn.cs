@@ -7,18 +7,28 @@ namespace tp2skunkapi.Models
 {
     public class Turn 
     {
-		private Player player;
-		private int turnScore;
-		private Dice gameDice;
-		private List<int> rollSequence;
-		private int chipsToKitty;
-		private bool hasAnotherRoll;
+		public Player player { get; set; }
+		public int turnScore { get; set; }
+		public Dice gameDice { get; set; }
+		public List<DiceValue> rollSequence { get; set; }
+		public int chipsToKitty { get; set; }
+		public bool hasAnotherRoll { get; set; }
 
 		public Turn(Player player, Dice gameDice)
 		{
 			this.player = player;
 			this.gameDice = gameDice;
-			rollSequence = new List<int>();
+			rollSequence = new List<DiceValue>();
+			turnScore = 0;
+			chipsToKitty = 0;
+			hasAnotherRoll = true;
+		}
+
+		public Turn(Player player)
+		{
+			this.player = player;
+			this.gameDice = new Dice();
+			rollSequence = new List<DiceValue>();
 			turnScore = 0;
 			chipsToKitty = 0;
 			hasAnotherRoll = true;
@@ -43,7 +53,7 @@ namespace tp2skunkapi.Models
 				player.doubleSkunk();
 				turnScore = 0;
 				chipsToKitty = 4;
-				rollSequence.Add(-4);
+				rollSequence.Add(new DiceValue(gameDice.getDie1().lastRoll, gameDice.getDie2().lastRoll));
 				hasAnotherRoll = false;
 			}
 			else if (gameDice.getSkunkType() == SkunkType.SKUNKDUECE)
@@ -51,7 +61,7 @@ namespace tp2skunkapi.Models
 				player.skunkDeuce();
 				turnScore = 0;
 				chipsToKitty = 2;
-				rollSequence.Add(-2);
+				rollSequence.Add(new DiceValue(gameDice.getDie1().lastRoll, gameDice.getDie2().lastRoll));
 				hasAnotherRoll = false;
 			}
 			else if (gameDice.getSkunkType() == SkunkType.SINGLE)
@@ -59,13 +69,13 @@ namespace tp2skunkapi.Models
 				player.singleSkunk();
 				turnScore = 0;
 				chipsToKitty = 1;
-				rollSequence.Add(-1);
+				rollSequence.Add(new DiceValue(gameDice.getDie1().lastRoll, gameDice.getDie2().lastRoll));
 				hasAnotherRoll = false;
 			}
 			else
 			{ //add score to turnScore
 				turnScore = turnScore + rollValue;
-				rollSequence.Add(rollValue);
+				rollSequence.Add(new DiceValue(gameDice.getDie1().lastRoll, gameDice.getDie2().lastRoll));
 				hasAnotherRoll = true;
 			}
 		}
@@ -83,6 +93,11 @@ namespace tp2skunkapi.Models
 		public int getChipsToKitty()
 		{
 			return chipsToKitty;
+		}
+
+		public Player getCurrentPlayer()
+		{
+			return player;
 		}
 	}
 }

@@ -7,12 +7,12 @@ namespace tp2skunkapi.Models
 {
     public class Game
     {
-		private List<Player> players;
-		public List<Player> playersWithScoreOver100 = new List<Player>();
-		private List<Turn> gameSeries;
-		private int kittyCount = 0;
-		private Dice gameDice;
-		private bool victory = false;
+		public List<Player> players { get; set; }
+		public List<Player> playersWithScoreOver100 { get; set; }
+		public List<Turn> gameSeries { get; set; }
+		public int kittyCount { get; set; }
+		public Dice gameDice { get; set; }
+		public bool victory { get; set; }
 
 		public Game(List<string> playerNames, Dice diceUsed)
 		{
@@ -23,6 +23,9 @@ namespace tp2skunkapi.Models
 			{
 				players.Add(new Player(playerName, 0, 50));
 			});
+			playersWithScoreOver100 = new List<Player>();
+			victory = false;
+			kittyCount = 0;
 		}
 
 		public Game(List<Player> playerInitialized, Dice diceUsed)
@@ -31,6 +34,9 @@ namespace tp2skunkapi.Models
 			gameDice = diceUsed;
 			players = new List<Player>();
 			players = playerInitialized;
+			playersWithScoreOver100 = new List<Player>();
+			victory = false;
+			kittyCount = 0;
 		}
 
 		public Game(List<Player> playerInitialized)
@@ -39,6 +45,9 @@ namespace tp2skunkapi.Models
 			gameDice = new Dice();
 			players = new List<Player>();
 			players = playerInitialized;
+			playersWithScoreOver100 = new List<Player>();
+			victory = false;
+			kittyCount = 0;
 		}
 
 		public void addTurnToSeries(Turn turn)

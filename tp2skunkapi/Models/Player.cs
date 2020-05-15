@@ -7,10 +7,10 @@ namespace tp2skunkapi.Models
 {
     public class Player
     {
-        private int score;
-        private int chipCount;
-        private String playerName;
-        public Player()
+        public int score { get; set; }
+		public int chipCount { get; set; }
+		public String playerName { get; set; }
+		public Player()
         {
             score = 0;
             chipCount = 100;

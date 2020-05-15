@@ -7,8 +7,8 @@ namespace tp2skunkapi.Models
 {
     public class Tournament
     {
-		private List<Game> gameSeries;
-		private List<Player> currentPlayerStatus;
+		public List<Game> gameSeries { get; set; }
+		public List<Player> currentPlayerStatus { get; set; }
 		public Tournament()
 		{
 			gameSeries = new List<Game>();
