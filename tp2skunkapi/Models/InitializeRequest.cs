@@ -7,7 +7,7 @@ namespace tp2skunkapi.Models
 {
     public class InitializeRequest
     {
-        public String[] PlayerNames { get; set; }
+        public List<String> PlayerNames { get; set; }
         public string GameMode { get; set; }
     }
 }

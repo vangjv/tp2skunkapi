@@ -7,8 +7,8 @@ namespace tp2skunkapi.Models
 {
     public class Tournament
     {
-		public List<Game> gameSeries;
-		public List<Player> currentPlayerStatus;
+		private List<Game> gameSeries;
+		private List<Player> currentPlayerStatus;
 		public Tournament()
 		{
 			gameSeries = new List<Game>();
@@ -61,6 +61,21 @@ namespace tp2skunkapi.Models
 				}
 			}
 			return playerHasNoChips || player150Chips;
+		}
+
+		public List<Player> getCurrentPlayerStatus()
+		{
+			return currentPlayerStatus;
+		}
+
+		public List<Game> getGameSeries()
+		{
+			return gameSeries;
+		}
+
+		public int getGameSeriesCount()
+		{
+			return gameSeries.Count;
 		}
 
 	}

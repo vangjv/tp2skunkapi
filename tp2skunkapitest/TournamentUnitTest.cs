@@ -132,6 +132,5 @@ namespace tp2skunkapitest
             chipLeaderIndex = testTournament.getChipLeaderIndex();
             Assert.AreEqual(0, chipLeaderIndex);
         }
-
     }
 }

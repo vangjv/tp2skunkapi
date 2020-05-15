@@ -13,11 +13,21 @@ namespace tp2skunkapi.DataAccess
         public TournamentDAO(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
+            Tournament currentTournament = new Tournament();
+            _cache.Set("currentTournament", currentTournament);
         }
 
-        public void createNewTournament(InitializeRequest initializeRequest)
+        public bool isNewTournament()
         {
-            _cache.Set("rules", "");
+            Tournament currentTournament = (Tournament)_cache.Get("currentTournament");
+            if (currentTournament.getGameSeriesCount() < 1)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
+        
     }
 }
