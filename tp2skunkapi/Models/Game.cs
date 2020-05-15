@@ -14,93 +14,84 @@ namespace tp2skunkapi.Models
 		private Dice gameDice;
 		private bool victory = false;
 
-		public Game(List<Player> players, int playerCount, Dice gameDice)
+		public Game(List<string> playerNames, Dice diceUsed)
 		{
-			//this.players = players;
-			//this.gameDice = gameDice;
-			//gameSeries = new List<Turn>();
-			////if no players are passed get names for number of players
-			//if (players.Count() == 0)
-			//{
-			//	for (int i = 0; i < playerCount; i++)
-			//	{
-			//		players.Add(new Player(GamePL.getPlayerName(i), 0, 50));
-			//	}
-			//}
+			gameSeries = new List<Turn>();
+			gameDice = diceUsed;
+			players = new List<Player>();
+			playerNames.ForEach(playerName =>
+			{
+				players.Add(new Player(playerName, 0, 50));
+			});
 		}
 
-
-	public void startGame()
+		public Game(List<Player> playerInitialized, Dice diceUsed)
 		{
-			//while (victory == false)
-			//{
-			//	startSeries();
-			//	checkForVictory();
-			//}
-			////final turn for other players before declaring victory
-			//GamePL.announceFinalRound(playersWithScoreOver100);
-			//players.forEach((player)-> {
-			//	if (player.getScore() < 100)
-			//	{
-			//		Turn finalTurn = new Turn(player, gameDice);
-			//		finalTurn.processTurns();
-			//		gameSeries.add(finalTurn);
-			//		kittyCount = kittyCount + finalTurn.getChipsToKitty();
-			//	}
-			//});
-
-			////sort players by score
-			//Collections.sort(players);
-			//processChipsForWinner();
-			//GamePL.printVictoryScores(players);
+			gameSeries = new List<Turn>();
+			gameDice = diceUsed;
+			players = new List<Player>();
+			players = playerInitialized;
 		}
 
-		public void startSeries()
+		public void addTurnToSeries(Turn turn)
 		{
-			////start turn series
-			//players.forEach((player)-> {
-			//	Turn newTurn = new Turn(player, gameDice);
-			//	newTurn.processTurns();
-			//	gameSeries.add(newTurn);
-			//	kittyCount = kittyCount + newTurn.getChipsToKitty();
-			//});
+			gameSeries.Add(turn);
 		}
 
 		public void checkForVictory()
 		{
-			//players.forEach((player)-> {
-			//	if (player.getScore() >= 100)
-			//	{
-			//		playersWithScoreOver100.add(player);
-			//		victory = true;
-			//	}
-			//});
+			players.ForEach(player => {
+				if (player.getScore() >= 100)
+				{
+					playersWithScoreOver100.Add(player);
+					victory = true;
+				}
+			});
 		}
 
 		public void processChipsForWinner()
 		{
-			//for (int i = 0; i < players.size(); i++)
-			//{
-			//	if (i == 0)
-			//	{
-			//		//winner, add chips
-			//		players.get(i).addChips(kittyCount);
-			//	}
-			//	else
-			//	{
-			//		//losers, deduct and add to winner
-			//		if (players.get(i).getScore() <= 0)
-			//		{
-			//			players.get(i).removeChips(10);
-			//			players.get(0).addChips(10);
-			//		}
-			//		else
-			//		{
-			//			players.get(i).removeChips(5);
-			//			players.get(0).addChips(5);
-			//		}
-			//	}
-			//}
+			int winnerIndex = findLeaderIndex();
+			for (int i = 0; i < players.Count(); i++)
+			{
+				if (i == winnerIndex)
+				{
+					//winner, add chips
+					players[winnerIndex].addChips(kittyCount);
+				}
+				else
+				{
+					//losers, deduct and add to winner
+					if (players[i].getScore() <= 0)
+					{
+						players[i].removeChips(10);
+						players[winnerIndex].addChips(10);
+					}
+					else
+					{
+						players[i].removeChips(5);
+						players[winnerIndex].addChips(5);
+					}
+				}
+			}
+		}
+
+		public int findLeaderIndex()
+		{
+			var greatestIndex = 0;
+			for (int i = 1; i < players.Count(); i++)
+			{
+				if (players[i].getScore() > players[greatestIndex].getScore())
+				{
+					greatestIndex = i;
+				}
+			}
+			return greatestIndex;
+		}
+
+		public Player getLeader()
+		{
+			return players[findLeaderIndex()];
 		}
 
 		public void setKittyCount(int kitty)

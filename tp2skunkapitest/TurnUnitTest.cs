@@ -122,12 +122,10 @@ namespace tp2skunkapitest
 		{
 			Player test_player_one = new Player("Player_One", 50, 50);
 			//use two predictable dice to get turn score
-			//test SKUNKDUECE
 			Die test_die = new CrookedDie(3);
 			Dice test_dice = new Dice(test_die, test_die);
 			Turn test_turn = new Turn(test_player_one, test_dice);
 			test_turn.setTurnScore(10);
-			//ensure a turn score is added before its removed by single skunk
 			Assert.AreEqual(test_turn.getTurnScore(), 10);
 			test_turn.processRoll();
 			//rolling adds on die values to already sety turn score.
