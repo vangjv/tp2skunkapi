@@ -34,31 +34,6 @@ namespace tp2skunkapi.Models
 			this.turnScore = turnScore;
 		}
 
-		public void processTurns(int turnSelection)
-		{
-			if (turnSelection == 1)
-			{//1 = roll
-				processRoll();
-				if (hasAnotherRoll == true)
-				{
-					//processTurns();
-				}
-				else
-				{
-					summarizeTurn();
-					//TurnPL.summarizeTurn(player.getPlayerName(), turnScore, chipsToKitty, player.getChipCount(), rollSequence, player.getScore());
-				}
-			}
-			else if (turnSelection == 2)
-			{ //2 = pass
-				passTurn();
-			}
-			else
-			{
-				//processTurns();
-			}
-		}
-
 		public void processRoll()
 		{
 			gameDice.roll();

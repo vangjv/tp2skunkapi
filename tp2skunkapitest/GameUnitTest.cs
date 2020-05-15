@@ -26,7 +26,7 @@ namespace tp2skunkapitest
 			playerList.Add(test_player_two);
 			Game test_game = new Game(playerList, 2, test_dice);
 			test_game.checkForVictory();
-			assertEquals(test_game.isVictory(), true);
+			Assert.AreEqual(test_game.isVictory(), true);
 		}
 
 	}
