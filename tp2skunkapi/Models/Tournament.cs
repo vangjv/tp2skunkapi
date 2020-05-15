@@ -46,7 +46,21 @@ namespace tp2skunkapi.Models
 
 		public bool checkForTournamentEnd()
 		{
-			return false;
+			bool playerHasNoChips = false;
+			bool player150Chips = false;
+			for (int i = 0; i < currentPlayerStatus.Count(); i++)
+			{
+				if (currentPlayerStatus[i].getChipCount() == 0)
+				{
+					playerHasNoChips = true;
+				}
+
+				if (currentPlayerStatus[i].getChipCount() >= 150)
+				{
+					player150Chips = true;
+				}
+			}
+			return playerHasNoChips || player150Chips;
 		}
 
 	}
