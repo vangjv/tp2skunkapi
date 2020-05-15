@@ -13,11 +13,9 @@ namespace tp2skunkapi.Controllers
     [Route("[controller]")]
     public class RulesController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
         private RulesAccess rulesAccess;
-        public RulesController(ILogger<WeatherForecastController> logger, IMemoryCache memoryCache)
+        public RulesController(IMemoryCache memoryCache)
         {
-            _logger = logger;
             rulesAccess = new RulesAccess(memoryCache);
         }
 
