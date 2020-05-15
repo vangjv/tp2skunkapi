@@ -18,12 +18,14 @@ namespace tp2skunkapi.Controllers
         private TournamentDAO tournamentObject;
         private GameDAO gameObject;
         private TurnDAO turnObject;
+        private SkunkOptionsDAO skunkOptions;
         public SkunkController(IMemoryCache memoryCache)
         {
             rulesAccess = new RulesDAO(memoryCache);
             tournamentObject = new TournamentDAO(memoryCache);
             gameObject = new GameDAO(memoryCache);
             turnObject = new TurnDAO(memoryCache);
+            skunkOptions = new SkunkOptionsDAO(memoryCache);
         }
 
         [HttpGet]
@@ -36,13 +38,18 @@ namespace tp2skunkapi.Controllers
         [HttpPost("initialize")]
         public InitializeRequest Initialize([FromBody]InitializeRequest initializeRequest)
         {
+            //set gamemode
+            skunkOptions.setGameMode(initializeRequest.GameMode);
             if (initializeRequest.GameMode == "Tournament")
             {
                 //initialize tournament
+                tournamentObject.createNewTournament();
+                gameObject.createNewGame(initializeRequest);
+
             } else
             {
                 //initialize single game
-                
+                gameObject.createNewGame(initializeRequest);                
             }
             return initializeRequest;
         }

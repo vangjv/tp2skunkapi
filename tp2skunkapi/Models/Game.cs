@@ -9,14 +9,14 @@ namespace tp2skunkapi.Models
     {
 		public List<Player> players { get; set; }
 		public List<Player> playersWithScoreOver100 { get; set; }
-		public List<Turn> gameSeries { get; set; }
+		public List<Turn> turnSeries { get; set; }
 		public int kittyCount { get; set; }
 		public Dice gameDice { get; set; }
 		public bool victory { get; set; }
 
 		public Game(List<string> playerNames, Dice diceUsed)
 		{
-			gameSeries = new List<Turn>();
+			turnSeries = new List<Turn>();
 			gameDice = diceUsed;
 			players = new List<Player>();
 			playerNames.ForEach(playerName =>
@@ -30,7 +30,7 @@ namespace tp2skunkapi.Models
 
 		public Game(List<Player> playerInitialized, Dice diceUsed)
 		{
-			gameSeries = new List<Turn>();
+			turnSeries = new List<Turn>();
 			gameDice = diceUsed;
 			players = new List<Player>();
 			players = playerInitialized;
@@ -41,18 +41,16 @@ namespace tp2skunkapi.Models
 
 		public Game(List<Player> playerInitialized)
 		{
-			gameSeries = new List<Turn>();
+			turnSeries = new List<Turn>();
 			gameDice = new Dice();
 			players = new List<Player>();
 			players = playerInitialized;
 			playersWithScoreOver100 = new List<Player>();
-			victory = false;
-			kittyCount = 0;
 		}
 
 		public void addTurnToSeries(Turn turn)
 		{
-			gameSeries.Add(turn);
+			turnSeries.Add(turn);
 		}
 
 		public void checkForVictory()
