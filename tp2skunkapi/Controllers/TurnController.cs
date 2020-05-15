@@ -18,15 +18,45 @@ namespace tp2skunkapi.Controllers
         public TurnController(IMemoryCache memoryCache)
         {
             turnObject = new TurnDAO(memoryCache);
+        }
+
+        [HttpGet]
+        [Route("createNewTurn")]
+        public ActionResult createNewTurn()
+        {
             turnObject.createNewTurn(new Player("Jon", 50, 50));
+            return Ok(turnObject.getCurrentPlayer());
         }
 
         [HttpGet]
         [Route("currentTurnPlayer")]
-        public ActionResult Get()
+        public ActionResult getCurrentPlayer()
         {
             return Ok(turnObject.getCurrentPlayer());
         }
-        
+
+        [HttpGet]
+        [Route("processRoll")]
+        public ActionResult processRoll()
+        {
+            turnObject.processTurnRoll();
+            return Ok(turnObject.getCurrentPlayer());
+        }
+
+        [HttpGet]
+        [Route("currentTurnExist")]
+        public ActionResult currentTurnExist()
+        {
+           
+            return Ok(turnObject.currentTurnExist());
+        }
+
+        [HttpGet]
+        [Route("getCurrentTurn")]
+        public ActionResult getCurrentTurn()
+        {
+            return Ok(turnObject.getCurrentTurn());
+        }
+
     }
 }

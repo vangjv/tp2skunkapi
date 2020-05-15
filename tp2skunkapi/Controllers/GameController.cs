@@ -12,12 +12,18 @@ namespace tp2skunkapi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GameController : ControllerBase
+    public class SkunkController : ControllerBase
     {
         private RulesDAO rulesAccess;
-        public GameController(IMemoryCache memoryCache)
+        private TournamentDAO tournamentObject;
+        private GameDAO gameObject;
+        private TurnDAO turnObject;
+        public SkunkController(IMemoryCache memoryCache)
         {
             rulesAccess = new RulesDAO(memoryCache);
+            tournamentObject = new TournamentDAO(memoryCache);
+            gameObject = new GameDAO(memoryCache);
+            turnObject = new TurnDAO(memoryCache);
         }
 
         [HttpGet]

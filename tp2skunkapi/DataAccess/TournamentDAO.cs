@@ -12,7 +12,17 @@ namespace tp2skunkapi.DataAccess
         private readonly IMemoryCache _cache;
         public TournamentDAO(IMemoryCache memoryCache)
         {
-            _cache = memoryCache;
+            _cache = memoryCache;            
+        }
+
+        public bool currentTournamentExist()
+        {
+            Tournament currentTournament;
+            return _cache.TryGetValue("currentTournament", out currentTournament);
+        }
+
+        public void createNewTournament()
+        {
             Tournament currentTournament = new Tournament();
             _cache.Set("currentTournament", currentTournament);
         }
@@ -27,6 +37,12 @@ namespace tp2skunkapi.DataAccess
             {
                 return false;
             }
+        }
+
+        public void addGameToCurrentTournament(Game game)
+        {
+            Tournament currentTournament = (Tournament)_cache.Get("currentTournament");
+            currentTournament.addGameToSeries(game);
         }
         
     }

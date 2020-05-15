@@ -16,6 +16,12 @@ namespace tp2skunkapi.DataAccess
             _cache = memoryCache;
         }
 
+        public bool currentTurnExist()
+        {
+            Turn currentTurn;
+            return _cache.TryGetValue("currentTurn", out currentTurn);
+        }
+
         public void createNewTurn(Player player)
         {
             Turn newTurn = new Turn(player);            
@@ -27,6 +33,13 @@ namespace tp2skunkapi.DataAccess
             Turn currentTurn = (Turn)_cache.Get("currentTurn");
             return currentTurn.getCurrentPlayer();
         }
+
+        public Turn getCurrentTurn()
+        {
+            Turn currentTurn = (Turn)_cache.Get("currentTurn");
+            return currentTurn;
+        }
+
 
         public void processTurnRoll()
         {
