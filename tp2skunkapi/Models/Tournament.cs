@@ -38,5 +38,10 @@ namespace tp2skunkapi.Models
 			return currentPlayerStatus[getChipLeaderIndex()];
 		}
 
+		public bool checkForTournamentEnd()
+		{
+			return false;
+		}
+
 	}
 }
