@@ -32,7 +32,11 @@ namespace tp2skunkapi.Controllers
         [Route("rules")]
         public ActionResult Get()
         {
-            return Ok(rulesAccess.getRules());
+            var rulesObject = new
+            {
+                rules = rulesAccess.getRules()
+            };
+            return Ok(rulesObject);
         }
 
         [HttpPost("initialize")]

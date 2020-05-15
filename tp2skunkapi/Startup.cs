@@ -28,6 +28,7 @@ namespace tp2skunkapi
         public void ConfigureServices(IServiceCollection services)
         {
             //in memory storage for data/state management
+            services.AddCors();
             services.AddMemoryCache();
             services.AddControllers();
         }
@@ -39,6 +40,7 @@ namespace tp2skunkapi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
