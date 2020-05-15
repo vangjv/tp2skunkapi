@@ -23,10 +23,10 @@ namespace tp2skunkapi.Models
 			return this.lastRoll;
 		}
 
-		public void roll() 
+		public virtual void roll() 
 		{
 			Random random = new Random();
-			this.lastRoll = random.Next(1, 6);
+			this.lastRoll = random.Next(1, 7);
 		}
 	}
 }

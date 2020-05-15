@@ -15,5 +15,12 @@ namespace tp2skunkapitest
             Die testDie = new Die();
             Assert.IsTrue(testDie.getLastRoll() > 0 && testDie.getLastRoll() < 7);
         }
+
+        [TestMethod]
+        public void TestDieGetLastRoll()
+        {
+            Die testDie = new Die(6);
+            Assert.IsTrue(testDie.getLastRoll() == 6);
+        }
     }
 }
